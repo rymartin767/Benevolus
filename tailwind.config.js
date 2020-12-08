@@ -1,23 +1,18 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
 module.exports = {
-    purge: [
-        './vendor/laravel/jetstream/**/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-    ],
-
+    future: {
+      // removeDeprecatedGapUtilities: true,
+      // purgeLayersByDefault: true,
+    },
+    purge: [],
     theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
+      extend: {
+        colors: {
+          atlas_blue: '#202d61',
+          amazon_blue: '#1ab1e3',
+          atlas_yellow: '#ffb826',
         },
+      },
     },
-
-    variants: {
-        opacity: ['responsive', 'hover', 'focus', 'disabled'],
-    },
-
-    plugins: [require('@tailwindcss/ui')],
-};
+    variants: {},
+    plugins: [],
+  }
