@@ -7,19 +7,14 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         @livewireStyles
 
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-nunito antialiased">
+        <div class="flex flex-col min-h-screen bg-gray-100">
+            <!-- Livewire Navigation -->
             @livewire('navigation-dropdown')
 
             <!-- Page Heading -->
@@ -30,13 +25,24 @@
             </header>
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            <main class="flex-1">
+                <div class="max-w-7xl mx-auto">
+                    {{ $slot }}
+                </div>
             </main>
+
+            <!-- Page Footer -->
+            <footer class="bg-white shadow mt-8">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between">
+                        <div class="text-xs">&copy 2020 NoTimeForCaution | JAFW</div>
+                    </div>
+                </div>
+            </footer>
         </div>
 
         @stack('modals')
-
         @livewireScripts
+        <script src="/js/app.js"></script>
     </body>
 </html>
