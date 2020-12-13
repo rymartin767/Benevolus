@@ -3,8 +3,8 @@
         <div class="grid grid-cols-3 gap-3">
             <div class="col-span-3 sm:col-span-1">
                 <div class="form-group">
-                    <label for="datetime" class="form-label">DateTime</label>
-                    <input wire:model.lazy="datetime" type="datetime-local" class="form-input w-full">
+                    <label for="date" class="form-label">{{ __('Journal Date') }}</label>
+                    <input wire:model.lazy="datetime" type="date" class="form-input w-full">
                     @error('datetime')
                         <div class="form-error">{{ $message }}</div>
                     @enderror
@@ -12,7 +12,7 @@
             </div>
             <div class="col-span-3 sm:col-span-1 sm:col-start-3">
                 <div class="form-group">
-                    <label for="locale" class="form-label">Where Are You?</label>
+                    <label for="locale" class="form-label">{{ __('Where Are You?') }}</label>
                     <input wire:model.lazy="location" type="text" class="form-input w-full">
                     @error('location')
                         <div class="form-error">{{ $message }}</div>
@@ -21,8 +21,9 @@
             </div>
             <div class="col-span-3 sm:col-span-1">
                 <div class="form-group">
-                    <label for="locale" class="form-label">How Are You Feeling</label>
-                    <select wire:model.lazy="feeling_number" name="feeling_number" id="" class="form-input w-full">
+                    <label for="locale" class="form-label">{{ __('How Are You Feeling Today?') }}</label>
+                    <select wire:model.lazy="feeling_number" wire:click="updateImage" name="feeling_number" id="" class="form-input w-full">
+                        <option value="">Choose One...</option>
                         <option value="1">Depleted</option>
                         <option value="2">Meh</option>
                         <option value="3">Fine</option>
@@ -34,8 +35,8 @@
                     @enderror
                 </div>
             </div>
-            <div class="hidden sm:block sm:col-span-1 sm:col-start-2 bg-blue-100 text-xs italic">
-                image
+            <div class="hidden sm:block sm:col-span-1 sm:col-start-2 text-xs italic {{ $image }}">
+                {{ $image }}
             </div>
             <div class="col-span-3 sm:col-span-1 sm:col-start-3">
                 <div class="form-group">

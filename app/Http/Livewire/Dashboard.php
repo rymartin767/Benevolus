@@ -16,8 +16,10 @@ class Dashboard extends Component
     public $feeling_reasons;
     public $project;
     public $grateful;
-    public $source_id = 0;
+    public $source_id;
     public $source_passage;
+
+    public $image;
 
     
     public function mount()
@@ -30,6 +32,19 @@ class Dashboard extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function updateImage()
+    {
+        if($this->feeling_number === "1") {
+            $this->image = 'bg-red-400';
+        }
+        if($this->feeling_number === "2") {
+            $this->image = 'bg-yellow-400';
+        }
+        if($this->feeling_number === "3") {
+            $this->image = 'bg-blue-400';
+        }
+    }
+
     public function rules()
     {
         return [
@@ -39,7 +54,7 @@ class Dashboard extends Component
             'feeling_reasons'=> 'required|string|min:5|max:255',
             'project' => 'required|string|min:5|max:75',
             'grateful' => 'required|string|min:5|max:255',
-            'source_id' => 'required|numeric|min:0|max:5',
+            'source_id' => 'required|min:0|max:5',
             'source_passage' => 'exclude_if:source_id,0|required|string|min:5|max:53353'
         ];
     }
