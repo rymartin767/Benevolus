@@ -13,7 +13,7 @@
 
     </head>
     <body class="font-nunito antialiased">
-        <div class="flex flex-col min-h-screen bg-gray-100">
+        <div class="flex flex-col min-h-screen bg-gray-50">
             <!-- Livewire Navigation -->
             @livewire('navigation-dropdown')
 
@@ -25,14 +25,12 @@
             </header>
 
             <!-- Page Content -->
-            <main class="flex-1">
-                <div class="max-w-7xl mx-auto">
-                    {{ $slot }}
-                </div>
+            <main class="flex-grow py-8">
+                {{ $slot }}
             </main>
 
             <!-- Page Footer -->
-            <footer class="bg-white shadow mt-8">
+            <footer class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between">
                         <div class="text-xs">&copy 2020 NoTimeForCaution | JAFW</div>
