@@ -17,11 +17,9 @@ class CreateEntriesTable extends Migration
             $table->id();
             $table->dateTime('dateTime');
             $table->string('location');
-            $table->smallInteger('feeling_number');
-            $table->string('feeling_reasons');
-            $table->string('project');
-            $table->string('grateful');
-            $table->foreignId('source_id');
+            $table->smallInteger('mood');
+            $table->json('grateful');
+            $table->foreignId('source_id')->nullable()->constrained();
             $table->text('source_passage')->nullable();
             $table->timestamps();
         });
