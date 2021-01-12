@@ -3,36 +3,54 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Source;
+use App\Models\Entry;
 
 class Dashboard extends Component
 {
-    public $sources;
-    public $step;
-
-    public $entry_date;
-    public $feel_rating;
-    public $feel_reason;
-    public $gratitude;
-    public $habits;
-
+    public $step = 1;
     
+    public $datetime;
+    public $location;
+    public $mood;
+    public $grateful;
+
+    protected $listeners = ['updateStep', 'updateEntry'];
+
     public function mount()
     {
-        $this->step = 1;
-        $this->sources = Source::all();
+        $this->grateful = collect();
     }
 
-    public function rules()
+    public function updateStep($step)
+    {
+        $this->step = $step;
+    }
+
+    public function updateEntry($attribute, $value)
+    {
+        $attribute === 'gratefulOne' || $attribute === 'gratefulTwo' || $attribute === 'gratefulThree' ? 
+            $this->grateful->push($value) : 
+            $this->$attribute = $value;
+    }
+
+    protected function formData()
     {
         return [
-            'gratitude' => 'required|string|min:5|max:65353'
+            'datetime' => $this->datetime,
+            'location' => $this->location,
+            'mood' => $this->mood,
+            'grateful' => json_encode($this->grateful),
+            'source_id' => null,
+            'source_passage' => null
         ];
     }
 
-    public function updated($propertyName)
+    public function submitForm()
     {
-        $this->validateOnly($propertyName);
+        $entry = Entry::create($this->formData());
+        if($entry) {
+            $this->reset();
+        }
     }
 
     public function render()

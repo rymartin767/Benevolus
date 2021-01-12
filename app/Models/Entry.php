@@ -10,7 +10,7 @@ class Entry extends Model
     use HasFactory;
 
     protected $fillable = [
-        'datetime', 'location', 'feeling_number', 'feeling_reasons', 'project', 'grateful', 'source_id', 'source_passage'
+        'datetime', 'location', 'mood', 'grateful', 'source_id', 'source_passage'
     ];
 
     public function Source()
