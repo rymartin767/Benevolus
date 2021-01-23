@@ -2,55 +2,47 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Forms\FormData;
 use Livewire\Component;
 use App\Models\Entry;
+use App\Models\Quote;
+use App\Models\Source;
 
 class Dashboard extends Component
 {
     public $step = 1;
-    
-    public $datetime;
-    public $location;
-    public $mood;
-    public $grateful;
 
-    protected $listeners = ['updateStep', 'updateEntry'];
+    public $entries;
+    public $formData;
+
+    protected $listeners = ['updateEntry'];
 
     public function mount()
     {
-        $this->grateful = collect();
+        $this->entries = Entry::all();
+        $this->formData = collect();
     }
 
-    public function updateStep($step)
+    public function updateEntry($e)
     {
-        $this->step = $step;
-    }
-
-    public function updateEntry($attribute, $value)
-    {
-        $attribute === 'gratefulOne' || $attribute === 'gratefulTwo' || $attribute === 'gratefulThree' ? 
-            $this->grateful->push($value) : 
-            $this->$attribute = $value;
-    }
-
-    protected function formData()
-    {
-        return [
-            'datetime' => $this->datetime,
-            'location' => $this->location,
-            'mood' => $this->mood,
-            'grateful' => json_encode($this->grateful),
-            'source_id' => null,
-            'source_passage' => null
-        ];
+        $this->step++;
+        $this->formData->push($e);
     }
 
     public function submitForm()
     {
-        $entry = Entry::create($this->formData());
-        if($entry) {
+        $form = new FormData($this->formData);
+        $saved = $form->save();
+        if($saved) {
             $this->reset();
         }
+    }
+
+    public function removeAll()
+    {
+        $entries = Entry::all();
+        $entries->map(fn($e) => $e->delete());
+        $this->reset();
     }
 
     public function render()

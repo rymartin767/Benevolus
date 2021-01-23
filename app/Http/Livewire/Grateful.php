@@ -6,6 +6,8 @@ use Livewire\Component;
 
 class Grateful extends Component
 {
+    public $validated = false;
+    
     public $gratefulOne;
     public $gratefulTwo;
     public $gratefulThree;
@@ -13,16 +15,36 @@ class Grateful extends Component
     public function rules()
     {
         return [
-            'gratefulOne' => 'required|min:5',
-            'gratefulTwo' => 'required|min:5',
-            'gratefulThree' => 'required|min:5'
+            'gratefulOne' => 'min:5',
+            'gratefulTwo' => 'min:5',
+            'gratefulThree' => 'min:5'
         ];
     }
 
     public function updated($propertyName)
     {
+        $this->validated = false;
         $this->validateOnly($propertyName);
-        $this->emit('updateEntry', $propertyName, $this->$propertyName);
+        $this->isValidated();
+    }
+
+    private function isValidated()
+    {
+        $this->validate();
+        $this->validated = true;
+    }
+
+    public function sendAndStep()
+    {
+        $collection = [
+            'grateful' => [
+                $this->gratefulOne,
+                $this->gratefulTwo,
+                $this->gratefulThree
+            ]
+        ];
+
+        $this->emit('updateEntry', $collection);
     }
 
     public function render()

@@ -15,7 +15,7 @@ class CreateEntriesTable extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('dateTime');
+            $table->date('date');
             $table->string('location');
             $table->smallInteger('mood');
             $table->json('grateful');

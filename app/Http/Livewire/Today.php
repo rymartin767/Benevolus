@@ -6,25 +6,35 @@ use Livewire\Component;
 
 class Today extends Component
 {
-    public $datetime;
+    public $validated = false;
+
+    public $date;
     public $location;
 
     public function rules()
     {
         return [
-            'datetime' => 'required',
-            'location' => 'required'
+            'date' => 'required',
+            'location' => 'required|min:3|max:50'
         ];
     }
 
     public function updated($propertyName)
     {
+        $this->validated = false;
         $this->validateOnly($propertyName);
-        if($propertyName === 'datetime') {
-            $this->emit('updateEntry', $propertyName, $this->datetime);
-        } else {
-            $this->emit('updateEntry', $propertyName, $this->location);
-        }
+        $this->isValidated();
+    }
+
+    private function isValidated()
+    {
+        $this->validate();
+        $this->validated = true;
+    }
+
+    public function sendAndStep()
+    {
+        $this->emit('updateEntry', $this->validate());
     }
     
     public function render()

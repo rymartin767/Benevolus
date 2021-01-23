@@ -6,6 +6,8 @@ use Livewire\Component;
 
 class Mood extends Component
 {
+    public $validated;
+    
     public $mood;
 
     public function rules()
@@ -17,8 +19,20 @@ class Mood extends Component
 
     public function updated($propertyName)
     {
+        $this->validated = false;
         $this->validateOnly($propertyName);
-        $this->emit('updateEntry', $propertyName, $this->mood);
+        $this->isValidated();
+    }
+
+    private function isValidated()
+    {
+        $this->validate();
+        $this->validated = true;
+    }
+
+    public function sendAndStep()
+    {
+        $this->emit('updateEntry', $this->validate());
     }
 
     public function render()
