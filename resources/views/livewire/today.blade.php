@@ -1,6 +1,6 @@
 <div class="grid grid-cols-10 bg-gray-200">
-    <div class="col-span-10 sm:col-span-5 text-3xl px-3 pt-2">Day #{{ Carbon\Carbon::now()->diffInDays(Carbon\Carbon::now()->startofYear()) }} of 365</div>
-    <div class="col-span-10 sm:col-span-5 sm:justify-self-end px-3 sm:pt-2">Day #348 of 2020</div>
+    <div class="col-span-10 sm:col-span-5 text-3xl px-3 pt-2">{{ Carbon\Carbon::today()->format('F d')}}</div>
+    <div class="col-span-10 sm:col-span-5 sm:justify-self-end px-3 sm:pt-2">Day #{{ Carbon\Carbon::now()->diffInDays(Carbon\Carbon::now()->startofYear()) }} of 365</div>
 
     <div class="col-span-10 text-center p-6 mb-12">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam fugit velit dolor rerum molestiae accusamus temporibus exercitationem? Incidunt quae, totam voluptatem officiis ipsa cupiditate eius suscipit aspernatur distinctio itaque. Vel!
@@ -19,7 +19,7 @@
     @isset($date)
         <div class="col-span-10 px-6 mb-3">
             <label for="location" class="block text-sm font-medium text-gray-700">
-                {{ __('Locale') }}
+                {{ __('Location') }}
             </label>
             <input wire:model.lazy="location" type="text" name="location" id="location" autocomplete="location" class="block w-full p-2 mt-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
             @error('location')

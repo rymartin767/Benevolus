@@ -7,18 +7,18 @@
     </div>
 
     <div class="col-span-10 px-6 mb-3">
-        <label for="grateful" class="block text-sm font-medium text-gray-700">
-            {{ __('Grateful') }}
+        <label for="grateful" class="block mb-2 text-sm font-medium text-gray-700">
+            {{ __('3 Things You\'re Grateful For') }}
         </label>
-        <input wire:model.lazy="gratefulOne" type="text" name="gratefulOne" id="gratefulOne" autocomplete="gratefulOne" class="block w-full p-2 mt-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
+        <input wire:model.lazy="gratefulOne" type="text" name="gratefulOne" id="gratefulOne" autocomplete="gratefulOne" class="block w-full p-2 mt-3 mb-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
         @error('gratefulOne')
             <div class="mt-2 text-xs text-red-600 italic">{{ $message }}</div>
         @enderror
-        <input wire:model.lazy="gratefulTwo" type="text" name="gratefulTwo" id="gratefulTwo" autocomplete="gratefulTwo" class="block w-full p-2 mt-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
+        <input wire:model.lazy="gratefulTwo" type="text" name="gratefulTwo" id="gratefulTwo" autocomplete="gratefulTwo" class="block w-full p-2 mt-3 mb-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
         @error('gratefulTwo')
             <div class="mt-2 text-xs text-red-600 italic">{{ $message }}</div>
         @enderror
-        <input wire:model.lazy="gratefulThree" type="text" name="gratefulThree" id="gratefulThree" autocomplete="gratefulThree" class="block w-full p-2 mt-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
+        <input wire:model.lazy="gratefulThree" type="text" name="gratefulThree" id="gratefulThree" autocomplete="gratefulThree" class="block w-full p-2 mt-3 mb-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
         @error('gratefulThree')
             <div class="mt-2 text-xs text-red-600 italic">{{ $message }}</div>
         @enderror

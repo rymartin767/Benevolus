@@ -2,6 +2,7 @@
     <div class="col-span-10 sm:col-span-5 text-3xl px-3 pt-2">Reading</div>
     <div class="col-span-10 sm:col-span-5 sm:justify-self-end px-3 sm:pt-2">Reading Aside</div>
 
+    {{ var_dump($quotesArray) }}
     <div class="col-span-10 text-center p-6 mb-12">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam fugit velit dolor rerum molestiae accusamus temporibus exercitationem? Incidunt quae, totam voluptatem officiis ipsa cupiditate eius suscipit aspernatur distinctio itaque. Vel!
     </div>
@@ -18,6 +19,11 @@
                 <button>Add Source Modal</button>
             @endforelse
         </select>
+        <x-modal modalTitle="Modal Title">
+            <x-jet-danger-button wire:click="modalDisplayed" wire:loading.attr="disabled">
+                {{ __('TRIGGER') }}
+            </x-jet-danger-button>
+        </x-modal>
     </div>
 
     <div class="col-span-10 px-6 mb-3">
@@ -34,18 +40,11 @@
         <label for="source_quotes" class="block text-sm font-medium text-gray-700">
             {{ __('Quotes from Source to Keep') }}
         </label>
-        <input wire:model.lazy="quoteOne" type="text" name="quoteOne" id="quoteOne" autocomplete="quoteOne" class="block w-full p-2 mt-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
-        @error('quoteOne')
+        <input wire:model="activeQuote" type="text" name="quote" id="quote" autocomplete="quote" class="block w-full p-2 mt-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
+        @error('activeQuote')
             <div class="mt-2 text-xs text-red-600 italic">{{ $message }}</div>
         @enderror
-        <input wire:model.lazy="quoteTwo" type="text" name="quoteTwo" id="quoteTwo" autocomplete="quoteTwo" class="block w-full p-2 mt-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
-        @error('quoteTwo')
-            <div class="mt-2 text-xs text-red-600 italic">{{ $message }}</div>
-        @enderror
-        <input wire:model.lazy="quoteThree" type="text" name="quoteThree" id="quoteThree" autocomplete="quoteThree" class="block w-full p-2 mt-1 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm sm:text-sm border-gray-300 rounded-md focus:outline-none">
-        @error('quoteThree')
-            <div class="mt-2 text-xs text-red-600 italic">{{ $message }}</div>
-        @enderror
+        <button wire:click.prevent="addQuote" class="p-2 bg-blue-600 text-white rounded-md">Add Quote</button>
     </div>
 
     @if($validated)

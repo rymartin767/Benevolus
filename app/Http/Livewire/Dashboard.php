@@ -5,12 +5,10 @@ namespace App\Http\Livewire;
 use App\Http\Forms\FormData;
 use Livewire\Component;
 use App\Models\Entry;
-use App\Models\Quote;
-use App\Models\Source;
 
 class Dashboard extends Component
 {
-    public $step = 1;
+    public $step = 4;
 
     public $entries;
     public $formData;

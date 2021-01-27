@@ -7,19 +7,33 @@ use Livewire\Component;
 
 class Reading extends Component
 {
+    public $showModal = false;
     public $sources;
 
-    public $validated = false;
+    public $activeQuote;
+    public $quotesArray = [];
 
     public $source_id;
-    public $quoteOne;
-    public $quoteTwo;
-    public $quoteThree;
     public $passage;
+
+    public $validated = false;
     
     public function mount()
     {
         $this->sources = Source::all();
+    }
+
+    public function modalDisplayed()
+    {
+        $this->dispatchBrowserEvent('confirming-modal-event');
+        $this->showModal = true;
+    }
+
+    public function addQuote()
+    {
+        $this->validateOnly('activeQuote');
+        array_push($this->quotesArray, $this->activeQuote);
+        $this->activeQuote = '';
     }
 
     public function rules()
@@ -27,23 +41,8 @@ class Reading extends Component
         return [
             'source_id' => 'numeric',
             'passage' => 'required|min:5',
-            'quoteOne' => 'required|min:5',
-            'quoteTwo' => 'required|min:5',
-            'quoteThree' => 'required|min:5'
+            'activeQuote' => 'min:5'
         ];
-    }
-
-    public function updated($propertyName)
-    {
-        $this->validated = false;
-        $this->validateOnly($propertyName);
-        $this->isValidated();
-    }
-
-    private function isValidated()
-    {
-        $this->validate();
-        $this->validated = true;
     }
 
     public function sendAndStep()
@@ -52,9 +51,7 @@ class Reading extends Component
             'reading' => [
                 'source' => $this->source_id,
                 'quotes' => [
-                    $this->quoteOne,
-                    $this->quoteTwo,
-                    $this->quoteThree
+                    $this->quotesArray
                 ],
                 'passage' => $this->passage
             ]
